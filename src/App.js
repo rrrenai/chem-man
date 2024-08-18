@@ -1,25 +1,62 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
 
-function App() {
+//--------------MAIN--------------
+
+export default function MyApp() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <SomeText />
+      <Form />
+      <MyButton />
+      <MyButton />
     </div>
   );
 }
 
-export default App;
+//--------------FUNCTIONS--------------
+
+var element = {
+  name: 'aluminum',
+  atomic: '1'
+};
+
+function SomeText() {
+  return (
+    <div className="App">
+      <h1>Welcome to Guess That Element!</h1>
+      <p>Hint 1: The name of this element is <strong>{element.name.length}</strong> characters long (including spaces).</p>
+    </div>
+  );
+};
+
+function MyButton() {
+  const [count, setCount] = useState(0);
+
+  function handleClick() {
+    setCount(count + 1);
+  }
+
+  return (
+    <button onClick={handleClick}>
+      Clicked {count} times
+    </button>
+  );
+};
+
+function Form() {
+  const [guess, setGuess] = useState('');
+  // ...
+  return (
+    <>
+    <label>
+    Guess: <input 
+      value={guess} 
+      onChange={e => setGuess(e.target.value)} 
+    />
+    </label>
+    {guess !== '' && 
+      <p>Your guess is "{guess.toLowerCase()}".</p>
+    }
+    </>
+  );
+}
